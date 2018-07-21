@@ -157,3 +157,38 @@ AWS_S3_URL=s3://<ACCESS_KEY_ID>:<ACCESS_SECRET_KEY>@s3-<BUCKET_REGION>.amazonaws
 
 Region codes can be found here: https://docs.aws.amazon.com/general/latest/gr/rande.html
 
+### Deploy to Heroku
+
+Add and commit the changes and then deploy to Heroku.
+```
+$ git push heroku master
+```
+
+Access the site with either the URL (e.g. `https://your-app.herokuapp.com`) or
+
+```
+$ heroku open
+```
+
+The first time you open the application you'll be prompted to setup a Wordpress account. You'll be able to log in and change your settings.
+
+## Updating WordPress Version
+
+The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.7.9. A notification was visible in the admin tab that a new version was available.
+
+To upgrade to a new wordpress version:
+
+In `.\composer.json`, change the wordpress version.
+```
+"johnpbloch/wordpress": "4.9.7",
+```
+
+Run the following
+```
+$ composer install
+$ composer update
+```
+And then commit the changes and push to Heroku.
+```
+$ git push heroku master
+```
