@@ -8,7 +8,9 @@ It'll also be my first foray into using Wordpress.
 
 The setup was cloned/based on this repo - [https://github.com/PhilippHeuer/wordpress-heroku](https://github.com/PhilippHeuer/wordpress-heroku) with some minor adjustments.
 
-The below steps are based on Windows 10 and for deployment to Heroku. I have yet to work on this locally so further steps for setting up for local development will be added in future.
+The first step was to clone the repo.
+
+The below steps are for Windows 10 and for deployment to Heroku. I have yet to work on this locally so further steps for setting up for local development will be added in future.
 
 ### PHP and Composer
 
@@ -49,7 +51,7 @@ Once entered in Heroku, all config values can be listed using:
 $ heroku config
 ```
 
-### Sendgrid
+### Sendgrid Mail
 
 This is an add-on with Heroku (credit card details required). The `starter` plan is free and should be adequate. Even if you don't think you'll be sending any emails, this is a good add-on to include so that emails can be sent to recover lost passwords.
 
@@ -82,3 +84,76 @@ if (!empty(getenv('SENDGRID_API_KEY'))) {
 ```
 
 *having been locked out of my account, a frustrating hour was spent trying to work out why Sendgrid wasn't sending emails but instead saying the host had disabled mail()*
+
+### Scheduling wp-cron
+
+Not entirely sure what this is for but following Philipp Heuer's instructions...
+
+```
+$ heroku addons:create scheduler:standard
+$ heroku config:set DISABLE_WP_CRON='true'
+$ heroku addons:open scheduler
+```
+
+With the following values:
+```
+Dyno Size = Free
+Frequency = Every 10 minutes
+Command = bin/cron/wordpress.sh
+```
+
+### Jaws MySQL Database
+
+Used MySQL via the JawsDB add-on. The kitefin plan is free.
+
+```
+$ heroku addons:create jawsdb:kitefin
+```
+
+### AWS S3 Storage
+
+Because Heroku's filesystem is ephemeral, images and other media must be more permanently stored elsewhere, in this case, on Amazon S3.
+
+1. Create an AWS account
+1. Create an S3 bucket that will hold the media content
+1. Create a user specifically to access the bucket
+
+A user was created with `AmazonS3FullAccess` permission policy.
+
+S3 Bucket policy used so only a particular user can access the bucket:
+```
+# accountnumber = the root account number
+# user = the user who will have access
+# bucketname = the name of the S3 bucket
+
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<accountnumber>:user/<user>"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::<bucketname>/*"
+        }
+    ]
+}
+```
+
+Once the bucket and user has been set up, the following key value pair needs to be added to the Heroku app config vars:
+```
+# access key id = the user's access key (under Security Credentials)
+# access secret key = the user's secret key (under Security Credentials)
+# bucket region = region (e.g. ap-southeast-2)
+# bucket name = the name of the S3 bucket
+
+AWS_S3_URL=s3://<ACCESS_KEY_ID>:<ACCESS_SECRET_KEY>@s3-<BUCKET_REGION>.amazonaws.com/<BUCKET_NAME>
+```
+
+Region codes can be found here: https://docs.aws.amazon.com/general/latest/gr/rande.html
+
