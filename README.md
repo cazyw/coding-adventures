@@ -42,9 +42,43 @@ SECURE_AUTH_SALT='SECRET_VALUE'
 LOGGED_IN_SALT='SECRET_VALUE'
 NONCE_SALT='SECRET_VALUE'
 ```
-Values can be generated here: https://api.wordpress.org/secret-key/1.1/salt/. There were too many errors setting up the values via the CLI that I entered the key value pairs in Heroku itself (Project > Setting > Config Vars). This was possibly because the values generated included a lot of special characters.
+Values can be generated here: https://api.wordpress.org/secret-key/1.1/salt/. There were too many errors (around special characters) setting up the values via the CLI that I entered the key value pairs in Heroku itself (Project > Setting > Config Vars).
 
 Once entered in Heroku, all config values can be listed using:
 ```
 $ heroku config
 ```
+
+### Sendgrid
+
+This is an add-on with Heroku (credit card details required). The `starter` plan is free and should be adequate. Even if you don't think you'll be sending any emails, this is a good add-on to include so that emails can be sent to recover lost passwords.
+
+Add it with:
+
+```
+$ heroku addons:create sendgrid:starter
+```
+
+This will automatically add  `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` to the app configuration.
+
+However, you will also need an API key and this has to be manually set up. Log into Sendgrid either through their website using the login and password in your config values, or via Heroku. Under Settings, create an API key and save this in Heroku under the key `SENDGRID_API_KEY`.
+
+**Amendment to the cloned code**
+
+Heroku/Sendgrid now requires authentication via the API key rather than username/password.
+
+The cloned code checks first for the username and password config values. This no longer works and the code in `.\config\plugins\wordpress\wordpress-sendgrid.php` has been replaced with the following code (use the API Key `else` block)
+```php
+<?php
+/**
+ * Configuration - Plugin: Sendgrid
+ * @url: https://wordpress.org/plugins/sendgrid-email-delivery-simplified/
+ */
+if (!empty(getenv('SENDGRID_API_KEY'))) {
+    // Auth method ('apikey')
+    define('SENDGRID_AUTH_METHOD', 'apikey');
+    define('SENDGRID_API_KEY', getenv('SENDGRID_API_KEY'));
+}
+```
+
+*having been locked out of my account, a frustrating hour was spent trying to work out why Sendgrid wasn't sending emails but instead saying the host had disabled mail()*
