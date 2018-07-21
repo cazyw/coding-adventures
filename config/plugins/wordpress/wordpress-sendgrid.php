@@ -8,12 +8,3 @@ if (!empty(getenv('SENDGRID_API_KEY'))) {
     define('SENDGRID_AUTH_METHOD', 'apikey');
     define('SENDGRID_API_KEY', getenv('SENDGRID_API_KEY'));
 }
-
-// the below no longer appears to work - an api key is required
-
-// } else if (!empty(getenv('SENDGRID_USERNAME')) && !empty(getenv('SENDGRID_PASSWORD'))) {
-//     // Auth method ('credentials')
-//     define('SENDGRID_AUTH_METHOD', 'credentials');
-//     define('SENDGRID_USERNAME', getenv('SENDGRID_USERNAME'));
-//     define('SENDGRID_PASSWORD', getenv('SENDGRID_PASSWORD'));
-// }
