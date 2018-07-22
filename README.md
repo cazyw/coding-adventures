@@ -121,7 +121,7 @@ Because Heroku's filesystem is ephemeral, images and other media must be more pe
 A user was created with `AmazonS3FullAccess` permission policy.
 
 S3 Bucket policy used so only a particular user can access the bucket:
-```
+```json
 # accountnumber = the root account number
 # user = the user who will have access
 # bucketname = the name of the S3 bucket
@@ -157,7 +157,7 @@ AWS_S3_URL=s3://<ACCESS_KEY_ID>:<ACCESS_SECRET_KEY>@s3-<BUCKET_REGION>.amazonaws
 
 Region codes can be found here: https://docs.aws.amazon.com/general/latest/gr/rande.html
 
-### Deploy to Heroku
+### Deploying to Heroku
 
 Add and commit the changes and then deploy to Heroku.
 ```
@@ -179,7 +179,7 @@ The WordPress version in the cloned repo was 4.7.2 and at the time this project 
 To upgrade to a new wordpress version:
 
 In `.\composer.json`, change the wordpress version.
-```
+```json
 "johnpbloch/wordpress": "4.9.7",
 ```
 
@@ -192,3 +192,40 @@ And then commit the changes and push to Heroku.
 ```
 $ git push heroku master
 ```
+
+## Updating Themes
+
+The cloned repo came with the Theme `Twenty Seventeen`. This has been changed to the theme `Dryad`. Both are on the Official WordPress Themes site.
+
+First find a theme on the Official [WordPress Themes](https://wordpress.com/themes) site. Then find it on the [Wordpress Packagist](https://wpackagist.org/s).
+
+Add the package as a requirement to the `require` section in `composer.json`
+
+```json
+"require": {
+  "php": ">=7.0",
+  ...
+	"wpackagist-theme/dyad":"1.0.10"  <== line added
+  },
+
+```
+Then also add the theme name under the installer-paths section.
+
+```json
+ "extra": {
+   "installer-paths": {
+      ...
+      "web/app/themes/{$name}/": [
+      "type:wordpress-theme",
+      "wpackagist-theme/dyad" <== line added
+      ]
+    },
+
+```
+
+Add and commit the changes and then deploy to Heroku.
+```
+$ git push heroku master
+```
+
+When you next log in, the theme will be listed in the Customization section and can be activated.
