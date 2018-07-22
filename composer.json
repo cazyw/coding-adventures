@@ -23,6 +23,7 @@
   "minimum-stability": "stable",
   "require": {
 	"php": ">=7.0",
+	"ext-gd": "*",
 	"ext-gettext": "*",
 	"composer/installers": "1.5.0",
 	"vlucas/phpdotenv": "2.4.0",
