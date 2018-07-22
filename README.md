@@ -16,9 +16,33 @@ The below steps are for Windows 10 and for deployment to Heroku. I have yet to w
 
 Download and unzip [PHP](https://windows.php.net/download/). Make sure the folder containing php.exe is added to the PATH environment variable.
 
-Download and install [Composer](https://getcomposer.org/download/). Also make sure it's added to the PATH.
+Download and install [Composer](https://getcomposer.org/download/). Also make sure it's added to the PATH. Composer requires PHP. It's not strictly necessary to setup Wordpress but is required if you want to make any changes (e.g. upgrade Wordpress version).
 
-Composer requires PHP. It's not strictly necessary to setup Wordpress but is required if you want to make any changes (e.g. upgrade Wordpress version).
+**Amendment to the cloned code**
+
+I found I had issues with cropping images in Wordpress unless the `ext-gd` package (bundled with php) was also added.
+
+Navigate to the PHP installation folder and open `php.ini` in an editor. Then edit the following line.
+
+```ini
+; From this
+;extension=php_gd2.dll
+
+; To this
+extension=php_gd2.dll
+```
+
+Add the following to `composer.json` and run composer update to update the `composer.lock` file.
+
+```json
+"require": {
+  "php": ">=7.0",
+  "ext-gd": "*", <== line added
+  ...
+
+```
+
+
 
 ### Heroku
 
