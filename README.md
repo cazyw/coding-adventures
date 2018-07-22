@@ -34,7 +34,7 @@ extension=php_gd2.dll
 
 Add the following to `composer.json` and run composer update to update the `composer.lock` file.
 
-```json
+```
 "require": {
   "php": ">=7.0",
   "ext-gd": "*", <== line added
@@ -225,7 +225,7 @@ First find a theme on the Official [WordPress Themes](https://wordpress.com/them
 
 Add the package as a requirement to the `require` section in `composer.json`
 
-```json
+```
 "require": {
   "php": ">=7.0",
   ...
@@ -235,7 +235,7 @@ Add the package as a requirement to the `require` section in `composer.json`
 ```
 Then also add the theme name under the installer-paths section.
 
-```json
+```
  "extra": {
    "installer-paths": {
       ...
