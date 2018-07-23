@@ -12,6 +12,8 @@ The first step was to clone the repo.
 
 The below steps are for Windows 10 and for deployment to Heroku. I have yet to work on this locally so further steps for setting up for local development will be added in future.
 
+Any modifications made to the `wordpress-heroku` cloned repo are in this repo.
+
 ### PHP and Composer
 
 Download and unzip [PHP](https://windows.php.net/download/). Make sure the folder containing php.exe is added to the PATH environment variable.
@@ -41,7 +43,6 @@ Add the following to `composer.json` and run composer update to update the `comp
   ...
 
 ```
-
 
 
 ### Heroku
