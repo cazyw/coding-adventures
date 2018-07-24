@@ -41,7 +41,8 @@
 	"predis/predis": "1.1.1",
 	"humanmade/s3-uploads": "2.0.0-beta3",
 	"wpackagist-plugin/debug-bar": "0.9",
-	"wpackagist-theme/dyad":"1.0.10"
+	"wpackagist-theme/dyad":"1.0.10",
+	"wpackagist-theme/baskerville":"1.26"
   },
   "require-dev": {
 	"heroku/heroku-buildpack-php": "*",
@@ -65,7 +66,8 @@
 	  ],
 	  "web/app/themes/{$name}/": [
 		"type:wordpress-theme",
-		"wpackagist-theme/dyad"
+		"wpackagist-theme/dyad",
+		"wpackagist-theme/baskerville"
 	  ]
 	},
 	"dropin-paths": {

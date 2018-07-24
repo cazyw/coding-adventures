@@ -248,6 +248,11 @@ Then also add the theme name under the installer-paths section.
 
 ```
 
+Run the following
+```
+$ composer update
+```
+
 Add and commit the changes and then deploy to Heroku.
 ```
 $ git push heroku master

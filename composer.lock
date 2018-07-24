@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d870c6e851f288f3919d0d01f4f8d33d",
+    "content-hash": "aa7adc600e71c3971813e792760c533e",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2667,16 +2667,16 @@
         },
         {
             "name": "wp-cli/extension-command",
-            "version": "v1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/extension-command.git",
-                "reference": "fe25c2acbe23963a5a95524b3770e04aedfd3d9e"
+                "reference": "5609057ff728712954f0ec2ab00f5295c94a0be5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/extension-command/zipball/fe25c2acbe23963a5a95524b3770e04aedfd3d9e",
-                "reference": "fe25c2acbe23963a5a95524b3770e04aedfd3d9e",
+                "url": "https://api.github.com/repos/wp-cli/extension-command/zipball/5609057ff728712954f0ec2ab00f5295c94a0be5",
+                "reference": "5609057ff728712954f0ec2ab00f5295c94a0be5",
                 "shasum": ""
             },
             "require-dev": {
@@ -2745,7 +2745,7 @@
             ],
             "description": "Manages plugins and themes, including installs, activations, and updates.",
             "homepage": "https://github.com/wp-cli/extension-command",
-            "time": "2018-07-18T20:24:09+00:00"
+            "time": "2018-07-20T12:42:38+00:00"
         },
         {
             "name": "wp-cli/import-command",
@@ -3775,6 +3775,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordfence/"
+        },
+        {
+            "name": "wpackagist-theme/baskerville",
+            "version": "1.26",
+            "source": {
+                "type": "svn",
+                "url": "https://themes.svn.wordpress.org/baskerville/",
+                "reference": "1.26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/theme/baskerville.1.26.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-theme",
+            "homepage": "https://wordpress.org/themes/baskerville/"
         },
         {
             "name": "wpackagist-theme/dyad",
