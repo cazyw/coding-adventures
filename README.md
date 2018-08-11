@@ -6,7 +6,7 @@ It'll also be my first foray into using Wordpress.
 
 ## Setup
 
-The setup was cloned/based on this repo - [https://github.com/PhilippHeuer/wordpress-heroku](https://github.com/PhilippHeuer/wordpress-heroku) with some minor adjustments.
+The setup was cloned/based on this repo - [https://github.com/PhilippHeuer/wordpress-heroku](https://github.com/PhilippHeuer/wordpress-heroku) with some minor adjustments as detailed below.
 
 The first step was to clone the repo.
 
@@ -24,7 +24,7 @@ Download and install [Composer](https://getcomposer.org/download/). Also make su
 
 I found I had issues with cropping images in Wordpress unless the `ext-gd` package (bundled with php) was also added.
 
-Navigate to the PHP installation folder and open `php.ini` in an editor. Then edit the following line.
+Navigate to the PHP installation folder and open `php.ini` in an editor. Then uncomment the following line.
 
 ```ini
 ; From this
@@ -34,7 +34,7 @@ Navigate to the PHP installation folder and open `php.ini` in an editor. Then ed
 extension=php_gd2.dll
 ```
 
-Add the following to `composer.json` and run composer update to update the `composer.lock` file.
+Add the following to `composer.json`
 
 ```
 "require": {
@@ -42,6 +42,13 @@ Add the following to `composer.json` and run composer update to update the `comp
   "ext-gd": "*", <== line added
   ...
 
+```
+
+Then run composer update to update the `composer.lock` file.
+
+```
+$ composer install <== may need to run this if not previously run
+$ composer update
 ```
 
 
@@ -182,6 +189,7 @@ AWS_S3_URL=s3://<ACCESS_KEY_ID>:<ACCESS_SECRET_KEY>@s3-<BUCKET_REGION>.amazonaws
 
 Region codes can be found here: https://docs.aws.amazon.com/general/latest/gr/rande.html
 
+
 ### Deploying to Heroku
 
 Add and commit the changes and then deploy to Heroku.
@@ -220,7 +228,7 @@ $ git push heroku master
 
 ## Updating Themes
 
-The cloned repo came with the Theme `Twenty Seventeen`. This has been changed to the theme `Dryad`. Both are on the Official WordPress Themes site.
+The cloned repo came with the Theme `Twenty Seventeen`. This was changed to `Dyad` and then `Baskerville` (the current theme). These are on the Official WordPress Themes site.
 
 First find a theme on the Official [WordPress Themes](https://wordpress.com/themes) site. Then find it on the [Wordpress Packagist](https://wpackagist.org/s).
 
@@ -230,7 +238,8 @@ Add the package as a requirement to the `require` section in `composer.json`
 "require": {
   "php": ">=7.0",
   ...
-	"wpackagist-theme/dyad":"1.0.10"  <== line added
+	"wpackagist-theme/dyad":"1.0.10",  <== line added
+    "wpackagist-theme/baskerville":"1.26"   <== line added
   },
 
 ```
@@ -242,6 +251,7 @@ Then also add the theme name under the installer-paths section.
       ...
       "web/app/themes/{$name}/": [
       "type:wordpress-theme",
+      "wpackagist-theme/baskerville", <== line added
       "wpackagist-theme/dyad" <== line added
       ]
     },
