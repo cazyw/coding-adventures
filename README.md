@@ -189,6 +189,13 @@ AWS_S3_URL=s3://<ACCESS_KEY_ID>:<ACCESS_SECRET_KEY>@s3-<BUCKET_REGION>.amazonaws
 
 Region codes can be found here: https://docs.aws.amazon.com/general/latest/gr/rande.html
 
+### Heroku Redis Caching
+
+To use Heroku Redis for caching run the following command:
+
+```
+$ heroku addons:create heroku-redis:hobby-dev
+```
 
 ### Deploying to Heroku
 
