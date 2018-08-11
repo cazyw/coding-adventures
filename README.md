@@ -199,7 +199,7 @@ The first time you open the application you'll be prompted to setup a Wordpress 
 
 ## Updating WordPress Version
 
-The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.7.9. A notification was visible in the admin tab that a new version was available.
+The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.9.7. A notification was visible in the admin tab that a new version was available.
 
 To upgrade to a new wordpress version:
 
