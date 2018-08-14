@@ -97,11 +97,11 @@ This will automatically add  `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` to the 
 
 However, you will also need an API key and this has to be manually set up. Log into Sendgrid either through their website using the login and password in your config values, or via Heroku. Under Settings, create an API key and save this in Heroku under the key `SENDGRID_API_KEY`.
 
-**Amendment to the cloned code**
+**Changes to the cloned code**
 
 Heroku/Sendgrid now requires authentication via the API key rather than username/password.
 
-The cloned code checks first for the username and password config values. This no longer works and the code in `.\config\plugins\wordpress\wordpress-sendgrid.php` has been replaced with the following code (use the API Key `else` block)
+The cloned code originally checked first for the username and password config values. This no longer works and the code in `.\config\plugins\wordpress\wordpress-sendgrid.php` has been replaced with the following code (uses the API Key `else` block)
 ```php
 <?php
 /**
@@ -115,11 +115,11 @@ if (!empty(getenv('SENDGRID_API_KEY'))) {
 }
 ```
 
-*having been locked out of my account, a frustrating hour was spent trying to work out why Sendgrid wasn't sending emails but instead saying the host had disabled mail()*
+*when setting up Wordpress, I forgot my password and was locked out of my account. A frustrating hour was spent trying to work out why Sendgrid wasn't sending emails (to reset the password) but instead saying the host had disabled mail()*
 
 ### Scheduling wp-cron
 
-Not entirely sure what this is for but following Philipp Heuer's instructions...
+Wordpress runs wp-cron (scheduled tasks) every time a page loads. This can mean tasks are run too often (if a site has a lot of traffic) or too little (if a site gets no traffic). In order to disable the default settings and use a consistent schedule, use the heroku scheduler:
 
 ```
 $ heroku addons:create scheduler:standard
@@ -130,7 +130,7 @@ $ heroku addons:open scheduler
 With the following values:
 ```
 Dyno Size = Free
-Frequency = Every 10 minutes
+Frequency = Daily
 Command = bin/cron/wordpress.sh
 ```
 
