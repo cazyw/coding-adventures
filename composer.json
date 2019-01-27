@@ -30,7 +30,7 @@
 	"wp-cli/wp-cli" : "1.4.1",
 	"oscarotero/env": "^1.1.0",
 	"koodimonni/composer-dropin-installer": "1.1.0",
-	"johnpbloch/wordpress": "4.9.8",
+	"johnpbloch/wordpress": "5.0.3",
 	"roots/wp-password-bcrypt": "1.0.0",
 	"wpackagist-plugin/wordfence": "6.3.22",
 	"wpackagist-plugin/all-in-one-seo-pack": "2.4.4",
@@ -42,7 +42,7 @@
 	"humanmade/s3-uploads": "2.0.0-beta3",
 	"wpackagist-plugin/debug-bar": "0.9",
 	"wpackagist-theme/dyad":"1.0.10",
-	"wpackagist-theme/baskerville":"1.26"
+	"wpackagist-theme/baskerville":"1.33"
   },
   "require-dev": {
 	"heroku/heroku-buildpack-php": "*",
