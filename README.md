@@ -16,6 +16,8 @@ Any modifications made to the `wordpress-heroku` cloned repo are in this repo.
 
 ### PHP and Composer
 
+#### Windows
+
 Download and unzip [PHP](https://windows.php.net/download/). Make sure the folder containing php.exe is added to the PATH environment variable.
 
 Download and install [Composer](https://getcomposer.org/download/). Also make sure it's added to the PATH. Composer requires PHP. It's not strictly necessary to setup Wordpress but is required if you want to make any changes (e.g. upgrade Wordpress version).
@@ -50,6 +52,8 @@ Then run composer update to update the `composer.lock` file.
 $ composer install <== may need to run this if not previously run
 $ composer update
 ```
+
+
 
 
 ### Heroku
@@ -214,13 +218,13 @@ The first time you open the application you'll be prompted to setup a Wordpress 
 
 ## Updating WordPress Version
 
-The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.9.8. A notification was visible in the admin tab that a new version was available.
+The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.9.8. A notification was visible in the admin tab that a new version was available. Currently upgraded to Wordpress version 5.0.3.
 
 To upgrade to a new wordpress version:
 
 In `.\composer.json`, change the wordpress version.
 ```json
-"johnpbloch/wordpress": "4.9.8",
+"johnpbloch/wordpress": "5.0.3",
 ```
 
 Run the following
