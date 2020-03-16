@@ -1,6 +1,6 @@
 # Coding Adventures
 
-This repo is for a wordpress blog about coding located here - [https://coding-adventures.herokuapp.com](https://coding-adventures.herokuapp.com). I'll be writing about my journey in coding, useful tools, events and how-tos.  As I'm using the free sandbox tier on Heroku, the page takes a while to initially spin up.
+This repo is for a wordpress blog about coding located here - [https://coding-adventures.herokuapp.com](https://coding-adventures.herokuapp.com). I'll be writing about my journey in coding, useful tools, events and how-tos. As I'm using the free sandbox tier on Heroku, the page takes a while to initially spin up.
 
 It'll also be my first foray into using Wordpress.
 
@@ -53,15 +53,11 @@ $ composer install <== may need to run this if not previously run
 $ composer update
 ```
 
-
-
-
 ### Heroku
 
 Setup an account on [Heroku](https://www.heroku.com/). I used the free tiers for Heroku and all add-ons. Install Heroku and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
 Create an application via the CLI with the app name (or don't include a name to get a random name). A warning will appear if that name is already taken.
-
 
 ```
 $ heroku create example-app
@@ -70,6 +66,7 @@ https://example-app.herokuapp.com/ | https://git.heroku.com/example-app.git
 ```
 
 The following config values need to be set:
+
 ```
 AUTH_KEY='SECRET_VALUE'
 SECURE_AUTH_KEY='SECRET_VALUE'
@@ -80,9 +77,11 @@ SECURE_AUTH_SALT='SECRET_VALUE'
 LOGGED_IN_SALT='SECRET_VALUE'
 NONCE_SALT='SECRET_VALUE'
 ```
+
 Values can be generated here: https://api.wordpress.org/secret-key/1.1/salt/. There were too many errors (around special characters) setting up the values via the CLI that I entered the key value pairs in Heroku itself (Project > Setting > Config Vars).
 
 Once entered in Heroku, all config values can be listed using:
+
 ```
 $ heroku config
 ```
@@ -97,7 +96,7 @@ Add it with:
 $ heroku addons:create sendgrid:starter
 ```
 
-This will automatically add  `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` to the app configuration.
+This will automatically add `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` to the app configuration.
 
 However, you will also need an API key and this has to be manually set up. Log into Sendgrid either through their website using the login and password in your config values, or via Heroku. Under Settings, create an API key and save this in Heroku under the key `SENDGRID_API_KEY`.
 
@@ -106,6 +105,7 @@ However, you will also need an API key and this has to be manually set up. Log i
 Heroku/Sendgrid now requires authentication via the API key rather than username/password.
 
 The cloned code originally checked first for the username and password config values. This no longer works and the code in `.\config\plugins\wordpress\wordpress-sendgrid.php` has been replaced with the following code (uses the API Key `else` block)
+
 ```php
 <?php
 /**
@@ -119,7 +119,7 @@ if (!empty(getenv('SENDGRID_API_KEY'))) {
 }
 ```
 
-*when setting up Wordpress, I forgot my password and was locked out of my account. A frustrating hour was spent trying to work out why Sendgrid wasn't sending emails (to reset the password) but instead saying the host had disabled mail()*
+_when setting up Wordpress, I forgot my password and was locked out of my account. A frustrating hour was spent trying to work out why Sendgrid wasn't sending emails (to reset the password) but instead saying the host had disabled mail()_
 
 ### Scheduling wp-cron
 
@@ -132,6 +132,7 @@ $ heroku addons:open scheduler
 ```
 
 With the following values:
+
 ```
 Dyno Size = Free
 Frequency = Daily
@@ -157,6 +158,7 @@ Because Heroku's filesystem is ephemeral, images and other media must be more pe
 A user was created with `AmazonS3FullAccess` permission policy.
 
 S3 Bucket policy used so only a particular user can access the bucket:
+
 ```json
 # accountnumber = the root account number
 # user = the user who will have access
@@ -182,6 +184,7 @@ S3 Bucket policy used so only a particular user can access the bucket:
 ```
 
 Once the bucket and user has been set up, the following key value pair needs to be added to the Heroku app config vars:
+
 ```
 # access key id = the user's access key (under Security Credentials)
 # access secret key = the user's secret key (under Security Credentials)
@@ -204,6 +207,7 @@ $ heroku addons:create heroku-redis:hobby-dev
 ### Deploying to Heroku
 
 Add and commit the changes and then deploy to Heroku.
+
 ```
 $ git push heroku master
 ```
@@ -218,24 +222,27 @@ The first time you open the application you'll be prompted to setup a Wordpress 
 
 ## Updating WordPress Version
 
-The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.9.8. A notification was visible in the admin tab that a new version was available. Currently upgraded to Wordpress version 5.1.0.
+The WordPress version in the cloned repo was 4.7.2 and at the time this project was set up, the Wordpress version was 4.9.8. A notification was visible in the admin tab that a new version was available. Currently upgraded to Wordpress version 5.3.2.
 
 To upgrade to a new wordpress version:
 
 In `.\composer.json`, change the wordpress version.
+
 ```json
-"johnpbloch/wordpress": "5.1.0",
+"johnpbloch/wordpress": "5.3.2",
 ```
 
 Run the following
+
 ```
 $ composer update
 ```
+
 And then commit the changes and push to Heroku.
+
 ```
 $ git push heroku master
 ```
-
 
 ## Updating Themes
 
@@ -254,6 +261,7 @@ Add the package as a requirement to the `require` section in `composer.json`
   },
 
 ```
+
 Then also add the theme name under the installer-paths section.
 
 ```
@@ -270,11 +278,13 @@ Then also add the theme name under the installer-paths section.
 ```
 
 Run the following
+
 ```
 $ composer update
 ```
 
 Add and commit the changes and then deploy to Heroku.
+
 ```
 $ git push heroku master
 ```
