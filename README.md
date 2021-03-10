@@ -277,7 +277,7 @@ Then also add the theme name under the installer-paths section.
 
 ```
 
-Run the following
+Run the following:
 
 ```
 $ composer update
