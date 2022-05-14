@@ -1,5 +1,7 @@
 # Coding Adventures
 
+**THIS PROJECT IS NO LONGER BEING MAINTAINED AND HAS BEEN REMOVED FROM HEROKU**
+
 This repo is for a wordpress blog about coding located here - [https://coding-adventures.herokuapp.com](https://coding-adventures.herokuapp.com). I'll be writing about my journey in coding, useful tools, events and how-tos. As I'm using the free sandbox tier on Heroku, the page takes a while to initially spin up.
 
 It'll also be my first foray into using Wordpress.
